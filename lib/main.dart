@@ -68,25 +68,30 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                label: ("Home"),
-                icon: Icon(Icons.home),
+                label: ("Payments"),
+                icon: Icon(Icons.currency_rupee_sharp),
                 backgroundColor: Colors.green),
             BottomNavigationBarItem(
-                label: ("Search"),
-                icon: Icon(Icons.search),
+                label: ("Savings"),
+                icon: Icon(Icons.savings),
                 backgroundColor: Colors.yellow),
             BottomNavigationBarItem(
-              label: ("Persons"),
-              icon: Icon(Icons.person),
+              label: ("Planner"),
+              icon: Icon(Icons.note),
+              backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              label: ("Bills Reminder"),
+              icon: Icon(Icons.receipt),
               backgroundColor: Colors.blue,
             ),
           ],
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.black,
-          iconSize: 40,
+          selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+          iconSize: 30,
           onTap: _onItemTapped,
-          elevation: 5),
+          elevation: 1),
     );
   }
 }
