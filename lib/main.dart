@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:beripay/widgets/contacts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,9 +32,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+  static List<Widget> _widgetOptions = <Widget>[
+    Contacts(),
     Text('Search Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     Text('Profile Page',
@@ -49,22 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: 200,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("banner.webp"),
-          fit: BoxFit.cover,
-        )),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text("BeriPay",
-              style: GoogleFonts.mukta(
-                textStyle: const TextStyle(color: Colors.white, fontSize: 30),
-              )),
-        ),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
