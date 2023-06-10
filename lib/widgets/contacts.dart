@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:beripay/widgets/upipayment.dart';
 
 class Contacts extends StatelessWidget {
   const Contacts({super.key});
@@ -23,7 +24,14 @@ class Contacts extends StatelessWidget {
               )),
         ),
       ),
-      const Card(child: Text("Pay using UPI")),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: UpiPaymentCard(
+          onPressed: () {
+            print("UPI Payment button pressed");
+          },
+        ),
+      ),
       GridView.count(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -47,7 +55,7 @@ class Contacts extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 126, 38, 31),
               radius: 20,
               child: Text(
-                "K",
+                "PK",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -58,7 +66,7 @@ class Contacts extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 126, 38, 31),
               radius: 20,
               child: Text(
-                "K",
+                "UP",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -69,7 +77,7 @@ class Contacts extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 126, 38, 31),
               radius: 20,
               child: Text(
-                "K",
+                "AR",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -80,7 +88,40 @@ class Contacts extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 126, 38, 31),
               radius: 20,
               child: Text(
-                "K",
+                "KK",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 0),
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 126, 38, 31),
+              radius: 20,
+              child: Text(
+                "SK",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 0),
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 126, 38, 31),
+              radius: 20,
+              child: Text(
+                "SS",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 0),
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 126, 38, 31),
+              radius: 20,
+              child: Text(
+                "PS",
                 style: TextStyle(fontSize: 30),
               ),
             ),

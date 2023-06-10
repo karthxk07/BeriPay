@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:beripay/widgets/contacts.dart';
 import 'package:beripay/widgets/reminder.dart';
-
+import 'package:beripay/widgets/planner.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,9 +36,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     Contacts(),
-   ReminderApp(),
+    ExpensePlanner(),
     Text('Profile Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    ReminderApp(),
   ];
 
   void _onItemTapped(int index) {
