@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class SavingsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,16 @@ class _HomePageState extends State<HomePage> {
   double currentSavings = 0.0;
 
   void addSavings(double amount, bool saveAmount) {
+    print(amount);
     setState(() {
-      double roundedAmount = double.parse(amount.toStringAsFixed(10));
-      double savingAmount = saveAmount ? roundedAmount : 0;
+      int roundedAmount = (amount / 10).ceil() * 10;
+      print(roundedAmount);
+      num savingAmount = roundedAmount - amount;
       currentSavings += savingAmount;
     });
   }
+
+  final myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextField(
+                          controller: myController,
                           keyboardType: TextInputType.number,
                           onChanged: (value) {
                             // Handle text input
@@ -89,10 +95,12 @@ class _HomePageState extends State<HomePage> {
                       ElevatedButton(
                         onPressed: () {
                           // Add the savings
-                          double amount = 0.0; // Retrieve the text input
+                          double amount = double.parse(
+                              myController.text); // Retrieve the text input
                           bool saveAmount = true; // Retrieve the checkbox value
                           addSavings(amount, saveAmount);
                           Navigator.pop(context);
+                          print("presses");
                         },
                         child: Text('Add'),
                       ),
