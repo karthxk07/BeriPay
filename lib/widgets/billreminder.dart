@@ -1,26 +1,45 @@
 import 'package:flutter/material.dart';
-class BillReminderApp extends StatelessWidget {
+import 'package:flutter/material.dart';
+
+class BillReminder {
+  final String time;
+  final String description;
+
+  BillReminder({required this.time, required this.description});
+}
+
+class BillReminderScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bill Reminder',
-      theme: ThemeData.dark(),
-      home: HomePage(),
-    );
+  _BillReminderScreenState createState() => _BillReminderScreenState();
+}
+
+class _BillReminderScreenState extends State<BillReminderScreen> {
+  List<BillReminder> reminders = [];
+
+  TextEditingController timeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    timeController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
-}
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<String> bills = [];
-
-  void addBill(String bill) {
+  void _addReminder() {
     setState(() {
-      bills.add(bill);
+      String time = timeController.text;
+      String description = descriptionController.text;
+
+      if (time.isNotEmpty && description.isNotEmpty) {
+        BillReminder reminder =
+            BillReminder(time: time, description: description);
+        reminders.add(reminder);
+
+        // Clear the text fields after adding the reminder
+        timeController.clear();
+        descriptionController.clear();
+      }
     });
   }
 
@@ -28,57 +47,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bill Reminder'),
+        title: Text('Bill Reminders'),
       ),
       body: Column(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text('Add Bill'),
-                  content: TextField(
-                    onChanged: (value) {
-                      // Handle text input
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Bill Name',
-                    ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: timeController,
+                  decoration: InputDecoration(
+                    labelText: 'Time',
                   ),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Cancel'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add the bill
-                        String bill = ''; // Retrieve the text input
-                        addBill(bill);
-                        Navigator.pop(context);
-                      },
-                      child: Text('Add'),
-                    ),
-                  ],
                 ),
-              );
-            },
-            child: Text('Add Bill'),
+                TextField(
+                  controller: descriptionController,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _addReminder,
+                  child: Text('Add Reminder'),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 20),
-          Text(
-            'Bills',
-            style: TextStyle(fontSize: 24),
-          ),
+          Divider(),
           Expanded(
             child: ListView.builder(
-              itemCount: bills.length,
+              itemCount: reminders.length,
               itemBuilder: (context, index) {
+                BillReminder reminder = reminders[index];
                 return ListTile(
-                  title: Text(bills[index]),
+                  title: Text(reminder.time),
+                  subtitle: Text(reminder.description),
                 );
               },
             ),
