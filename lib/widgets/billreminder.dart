@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-class BillReminderApp extends StatelessWidget {
+class FintechApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bill Reminder',
+      title: 'Fintech App',
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: BillReminderPage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
+class BillReminderPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _BillReminderPageState createState() => _BillReminderPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  List<String> bills = [];
+class _BillReminderPageState extends State<BillReminderPage> {
+  List<String> billReminders = [];
 
-  void addBill(String bill) {
+  void addBillReminder(String reminder) {
     setState(() {
-      bills.add(bill);
+      billReminders.add(reminder);
     });
   }
 
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bill Reminder'),
+        title: Text('Bill Payment Reminder'),
       ),
       body: Column(
         children: [
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('Add Bill'),
+                  title: Text('Add Bill Reminder'),
                   content: TextField(
                     onChanged: (value) {
                       // Handle text input
@@ -55,9 +55,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Add the bill
-                        String bill = ''; // Retrieve the text input
-                        addBill(bill);
+                        // Add the bill reminder
+                        String reminder = ''; // Retrieve the text input
+                        setState(() {
+                          addBillReminder(reminder);
+                        });
                         Navigator.pop(context);
                       },
                       child: Text('Add'),
@@ -66,24 +68,56 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-            child: Text('Add Bill'),
+            child: Text('Add Bill Reminder'),
           ),
           SizedBox(height: 20),
           Text(
-            'Bills',
+            'Bill Reminders',
             style: TextStyle(fontSize: 24),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: bills.length,
+              itemCount: billReminders.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(bills[index]),
+                  title: Text(billReminders[index]),
                 );
               },
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BillReminderListPage(reminders: billReminders)),
+              );
+            },
+            child: Text('View List'),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class BillReminderListPage extends StatelessWidget {
+  final List<String> reminders;
+
+  BillReminderListPage({required this.reminders});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bill Reminder List'),
+      ),
+      body: ListView.builder(
+        itemCount: reminders.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(reminders[index]),
+          );
+        },
       ),
     );
   }

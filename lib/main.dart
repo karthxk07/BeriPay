@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Contacts(),
     SavingsApp(),
     ExpensePlanner(),
-    BillReminderApp(),
+   FintechApp(),
   ];
 
   void _onItemTapped(int index) {
