@@ -87,6 +87,17 @@ class _BillReminderScreenState extends State<BillReminderScreen> {
               },
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        BillReminderListPage(reminders: billReminders)),
+              );
+            },
+            child: Text('View List'),
+          ),
         ],
       ),
     );
